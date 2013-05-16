@@ -29,14 +29,19 @@ class App.ScrollerView extends Batman.View
       node.addClass('drag')
 
     node.drag (ev, dd)=>
-      length = node.children().length - 1 # We have to substract one becouse first empty item 
-      if (not length) or (dd.deltaX > 0 and @get('active') == 0) or (dd.deltaX < 0 and @get('active') == length - 1)
+      length = @context.get('places.length')
+
+      if length == 1 or (dd.deltaX > 0 and @get('active') == 0) or (dd.deltaX < 0 and @get('active') == length - 1)
         node.removeClass('drag')
         return false
+
       node.css transform: "translate3d(#{dd.offsetX}px, 0px, 0px)"
 
     node.drag 'end', (ev,dd)=>
       node.removeClass 'drag'
+      
+      return false if @context.get('places.length') == 1
+
       if dd.deltaX > ($(window).width() / 100) * @offset
         @set 'active', @get('active') - 1
       else if dd.deltaX < - ($(window).width() / 100) * @offset
