@@ -20,7 +20,8 @@ exports.config =
         before: [
           'vendor/scripts/console-polyfill.js',
           'vendor/scripts/jquery-1.9.1.js',
-          'vendor/scripts/batman.jquery-0.14.1.js'
+          'vendor/scripts/batman.jquery-0.14.1.js',
+          'vendor/scripts/moment.js',
           'app/app.coffee'
         ]
         after: [

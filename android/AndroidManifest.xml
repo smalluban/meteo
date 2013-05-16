@@ -50,7 +50,9 @@
         android:hardwareAccelerated="true"
         android:debuggable="true">
         <activity android:name="Meteo" android:label="@string/app_name"
+            	android:screenOrientation="portrait"
                 android:theme="@android:style/Theme.Black.NoTitleBar"
+                android:windowSoftInputMode="adjustPan"
                 android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

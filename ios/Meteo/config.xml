@@ -14,7 +14,7 @@
 
     <access origin="*"/>
 
-    <!-- <content src="http://mysite.com/myapp.html" /> for external pages -->
+    <!-- <content src="http://10.1.2.14:3333/" /> -->
     <content src="index.html" />
 
     <!-- Preferences for iOS -->

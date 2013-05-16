@@ -1,0 +1,231 @@
+@import 'nib'
+@import '_easing'
+
+#main
+  div.screen
+    z-index 2
+    background white
+    absolute bottom 0 left 0
+    width 100%
+    height 100%
+    display flex
+    flex-flow column
+    overflow hidden
+    transition all 0.3s
+
+  article.places
+    position relative
+    z-index 1
+    flex 1
+    min-width 100%
+    height 0px
+    display flex
+    flex-flow row
+
+    user-select none
+
+    // Webkit hack
+    -webkit-backface-visibility hidden
+    -webkit-perspective 1000
+    transform translate3d(0px,0px,0px)
+
+    transition 0.2s all easeOutQuart
+
+    &.drag
+      transition none !important
+
+    section.place
+      min-width 100%
+      min-height 45rem
+      overflow-y hidden
+      position relative
+      padding 1rem 0 1rem
+      display flex
+      flex-flow column
+      &.empty
+        opacity 0.3
+        div.main
+          justify-content center
+          div.icon
+            color #1ABC9C
+            font-size 10rem
+            line-height 10rem
+            height 10rem
+          h1
+            font-size 2rem
+      &.loading
+        div.main, div.daily
+          opacity 0.2
+        div.loading
+          opacity 1
+          visibility visible
+      div.loading
+        visibility hidden
+        opacity 0
+        transition all 0.2s
+        absolute top 50% left 50%
+        font-size 6rem
+        line-height 6rem
+        margin -3rem 0 0 -3rem
+      div.main
+        transition opacity 0.2s
+        display flex
+        flex-flow column
+        align-items center
+        justify-content center
+        flex 1
+        align-items center
+        width 100%
+        div.icon
+          font-size 15rem
+          height 15rem
+          line-height 15rem
+        h1
+          font-weight 500
+          font-size 3rem
+          margin 1rem 0 0rem
+          text-align center
+          padding 1rem 2rem
+        div.temp
+          font-weight 700
+          font-size 5rem
+      div.daily
+        margin 0 auto
+        max-width 50rem
+        display flex
+        align-items center
+        padding 0 1rem
+        div.day
+          flex 1
+          min-height 11rem
+          background #f2f2f2
+          margin 0 0.2rem
+          padding 0.8rem 0.5rem
+          border-radius 0.3rem
+          text-align center
+          div.icon
+            font-size 3.5rem
+            line-height 5rem
+            height 5.5rem
+          div.temp
+            display flex
+            align-items flex-end
+            justify-content center
+            font-weight 700
+            div.min
+              font-size 1rem
+              margin-right 0.5rem
+            div.max
+              font-size 1.4rem
+          div.date
+            font-weight 300
+            padding-top 0.5rem
+            font-size 1.6rem
+
+  a.add-place
+    font-size 2.5rem
+    line-height 2.5rem
+    color #1ABC9C
+    display block
+    absolute top 0 left 0
+    padding 1.2rem
+    z-index 2
+    transition all 0.2s
+
+  div.navbar
+    position relative
+    z-index 2
+    display flex
+    flex-flow row
+    align-items stretch
+    justify-content space-between
+    background rgba(white,0.8)
+    font-size 2rem
+    line-height 1.4rem
+    height 4.4rem
+    a
+      padding 1.2rem
+      display inline-block
+      color inherit
+      text-decoration none
+      transition all 0.2s
+      &.remove
+        color #E74C3C
+      &.hide
+        visibility hidden
+        opacity 0
+    div.last-update, div.remove
+      width 11rem
+    div.last-update
+      color #999
+      font-size 1.2rem
+      line-height 2.4rem
+      transition all 0.2s
+      a
+        display inline-block
+        color #999
+        span.icon-refresh
+          color #F1C40F
+          margin-right 0.5rem
+    &.hide
+      visibility hidden
+      opacity 0
+    div.pages
+      font-size 5rem
+      text-align center
+      span.page
+        display inline-block
+        padding 0.8rem 0.2rem 0
+        color #ccc
+        transition all 0.2s 
+        &.active
+          color #999
+    div.remove
+      text-align right
+
+  form.new
+    z-index 1
+    fixed top 0 left 0
+    width 100%
+    padding 1.2rem
+    transform scale(0.98) translate3d(0,0,0)
+    transition all 0.3s
+    display flex
+    flex-flow row
+    background linear-gradient(top, #333 0%, #333 90%, #111 100%)
+    input[type=text]
+      flex 1
+      display block
+      border 1px solid #666
+      border none
+      border-radius 0.2rem
+      background #444
+      padding 0.7rem 1rem
+      font 1.8rem 'Lato', sans-serif
+      outline none
+      color white
+      &:focus
+        border-color #999
+    button
+      padding 0
+      display block
+      margin-left 1rem
+      background none
+      border none
+      border-radius 0.2rem
+      color white
+      width 3.8rem
+      font-size 4rem
+      font-weight bold
+      line-height 3rem
+      &:hover, &:active
+        color #1ABC9C
+
+  &.form 
+    div.screen
+      transform translate3d(0px, 6.2rem, 0px)
+    form.new
+      transform scale(1) translate3d(0,0,0)
+    a.add-place
+      transform rotateZ(45deg)
+      color #16A085

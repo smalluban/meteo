@@ -11,8 +11,9 @@ html
     meta(name='author', content='')
     meta(name="viewport", content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1")
 
+    link(href='http://fonts.googleapis.com/css?family=Lato:300,400,700', rel='stylesheet', type='text/css')
     link(rel='stylesheet', href='css/app.css')
-    
+
     //- AUTO RELOAD PLUGIN - REMOVE IN PRODUCTION ENV
     script
       window.brunch = window.brunch || {};
@@ -26,7 +27,7 @@ html
     script(src='js/app.js')
     
   body
-    div#main(data-yield="main")
+    div#main(data-yield="main", data-source-class="controllers.places.viewClass")
     script
       App.run()
       //document.addEventListener('deviceready', function() { }, false);

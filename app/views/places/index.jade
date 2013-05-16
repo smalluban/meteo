@@ -1,0 +1,43 @@
+div.screen(data-addclass-form="showForm")
+  a.add-place(data-event-click="toggleForm")
+      span.icon-plus
+  article.places(data-view="ScrollerView")
+    section.place.empty(data-showif="places.length | not")
+      div.main(data-event-click="toggleForm")
+        div.icon
+          span.icon-plus
+        h1
+          | Dodaj miejsce
+    
+    section.place.loading(data-foreach-place="places", data-context="place", data-addclass-loading="loading")
+      div.loading
+        span.loading.icon-spinner.icon-spin
+      div.main(data-context="weather.currently")
+        div.icon
+          span(data-source-class="icon | prepend 'meteo '")
+        h1(data-source="city")
+        div.temp(data-source="temperature | temp | append ' °C'", data-showif="weather")
+      div.daily
+        div.day(data-foreach-day="weather.daily.data", data-context="day")
+          div.icon
+            span(data-source-class="icon | prepend 'meteo '")
+          div.temp
+            div.min(data-source="temperatureMin | temp | append '°C'")
+            div.max(data-source="temperatureMax | temp | append '°C'")
+          div.date(data-source="time | day")
+
+  div.navbar(data-showif="places.length")
+    div.last-update
+      a.refresh(data-event-click="refresh")
+        span.icon-refresh
+        span(data-source="activePlace.updateFormated", data-showif="activePlace.updateFormated")
+    div.pages(data-hideif="places.length | equals 1")
+      span.page(data-foreach-place="places", data-addclass-active="place | equals activePlace") &middot;
+    div.remove
+      a.remove(data-event-click="remove", data-removeclass-hide="activePlace")
+        span.icon-trash
+
+form.new(data-event-submit="newPlace")
+    input(type="text", placeholder="Dodaj miejsce np. Warszawa")
+    button(type="submit")
+      +
