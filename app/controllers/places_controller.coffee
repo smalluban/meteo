@@ -22,7 +22,7 @@ class App.PlacesController extends Batman.Controller
     else 
       @set 'viewClass', 'form'
 
-  newPlace: (form)->
+  newPlaceFromName: (form)->
     input = $(form).find 'input[type=text]'
     oldMax = @get('places').length - 1
 
@@ -43,6 +43,24 @@ class App.PlacesController extends Batman.Controller
     # Clear viewClass
     @set 'viewClass', ''
 
-  refresh:-> @get('activePlace')?.refreshWheather()
-  remove: -> @get('activePlace')?.destroy()
+  newPlaceFromGps: ->
+    navigator.geolocation.getCurrentPosition (position)=>
+      oldMax = @get('places').length - 1
+      
+      place = App.Place.createFromGps position.coords
+      place.save()
+      place.refreshWheather()
+
+      # Move Scroller to new place
+      @set 'places.active', oldMax + 1
+
+      # Clear viewClass
+      @set 'viewClass', ''
+
+  refresh:-> 
+    @get('activePlace').refreshWheather()
+  
+  remove: -> 
+    @get('activePlace').destroy()
+    @set 'places.active', if @get('places.active') > 0 then @get('places.active') - 1 else 0
 

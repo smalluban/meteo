@@ -22,12 +22,9 @@ html
       };
     //- END RELOAD PLUGIN - REMOVE IN PRODUCTION ENV
     
-    //- script(src="cordova.js")
     script(src='js/vendor.js')
+    script(src="cordova-ios.js")
     script(src='js/app.js')
     
   body
     div#main(data-yield="main", data-source-class="controllers.places.viewClass")
-    script
-      App.run()
-      //document.addEventListener('deviceready', function() { }, false);

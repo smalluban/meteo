@@ -3,25 +3,13 @@ class App.ScrollerView extends Batman.View
 
   render: ->
     node = $(@get('node'))
+    places = @context.get('places')
 
-    # Get first active
-    @set 'active', @context.get('places.active')
-
-    # When active change (in Scroller), move scroller to proper position
-    @observeAndFire 'active', (newValue)->
-      @context.get('places').set 'active', newValue
-      @setOffset newValue
-
-    # When active change (in Controller) move scroller to proper position
-    # Set active in Scroller (will trigger change)
-    @context.get('places').on 'itemsWereAdded', => 
-      @set 'active', @context.get('places.length') - 1
-
-    @context.get('places').on 'itemsWereRemoved', =>
-      @set 'active', if @get('active') > 0 then @get('active') - 1 else 0
+    # When active change move scroller to proper position
+    places.observeAndFire 'active', (newValue)=> @setOffset newValue or 0
 
     # When window change size recalculate offset
-    $(window).resize => @setOffset @get('active')
+    $(window).resize => @setOffset places.get('active')
 
     # Set drag events
     node.drag 'start', =>
@@ -29,9 +17,9 @@ class App.ScrollerView extends Batman.View
       node.addClass('drag')
 
     node.drag (ev, dd)=>
-      length = @context.get('places.length')
+      length = places.get('length')
 
-      if length == 1 or (dd.deltaX > 0 and @get('active') == 0) or (dd.deltaX < 0 and @get('active') == length - 1)
+      if length == 1 or (dd.deltaX > 0 and places.get('active') == 0) or (dd.deltaX < 0 and places.get('active') == length - 1)
         node.removeClass('drag')
         return false
 
@@ -43,11 +31,11 @@ class App.ScrollerView extends Batman.View
       return false if @context.get('places.length') == 1
 
       if dd.deltaX > ($(window).width() / 100) * @offset
-        @set 'active', @get('active') - 1
+        places.set 'active', places.get('active') - 1
       else if dd.deltaX < - ($(window).width() / 100) * @offset
-        @set 'active', @get('active') + 1
+        places.set 'active', places.get('active') + 1
       else
-        @setOffset @get('active')
+        @setOffset places.get('active')
 
     super
 
@@ -59,7 +47,6 @@ class App.ScrollerItemView extends Batman.View
   render: ->
     $(window).resize @setSize
     @setSize()
-
     super
 
   setSize: => $(@get('node')).css width: $(window).width()

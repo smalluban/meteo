@@ -22,3 +22,9 @@ class App extends Batman.App
 # Make App available in the global namespace so it can be used
 # as a namespace and bound to in views.
 window.App = App
+
+# Run App as PhoneGap
+$(document).bind 'deviceready', -> App.run();
+
+# Run in browser
+# $ -> App.run();

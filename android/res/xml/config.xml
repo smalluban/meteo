@@ -29,25 +29,24 @@
 
     <access origin="*"/>
 
-    <!-- <content src="http://10.1.2.14:3333/" /> -->
+    <!-- <content src="http://mysite.com/myapp.html" /> for external pages -->
     <content src="index.html" />
 
     <preference name="loglevel" value="DEBUG" />
+    
     <!--
       <preference name="splashscreen" value="resourceName" />
-      
       <preference name="loadUrlTimeoutValue" value="20000" />
-      <preference name="InAppBrowserStorageEnabled" value="true" />
     -->
-      <preference name="backgroundColor" value="0x333" />
-      <preference name="keepRunning" value="true" />
-      <preference name="disallowOverscroll" value="true" />
-
+    
+    <preference name="backgroundColor" value="0x333" />
+    <preference name="keepRunning" value="true" />
+    <preference name="disallowOverscroll" value="true" />
 
     <feature name="App">
       <param name="android-package" value="org.apache.cordova.App"/>
     </feature>
-    <!-- <feature name="Geolocation">
+    <feature name="Geolocation">
       <param name="android-package" value="org.apache.cordova.GeoBroker"/>
     </feature>
     <feature name="Device">
@@ -100,5 +99,8 @@
     </feature>
     <feature name="InAppBrowser">
       <param name="android-package" value="org.apache.cordova.InAppBrowser"/>
-    </feature> -->
+    </feature>
+    <!-- Deprecated plugins element. Remove in 3.0 -->
+    <plugins>
+    </plugins>
 </widget>
