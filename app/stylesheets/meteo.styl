@@ -1,0 +1,52 @@
+@import 'nib'
+
+paddingWidth = 20px
+
+div#main
+  width 100%
+  height 100%
+  & > div
+    width 100%
+    height 100%
+    display flex
+    flex-flow column
+
+form#form
+  background #eee
+  padding paddingWidth
+  input
+    width 50% 
+
+ul#places
+  position relative
+  padding paddingWidth
+  flex 1
+  li
+    padding paddingWidth
+    background white
+    absolute top 0 left 0
+    width 100%
+    height 100%
+    display none
+    text-align center
+    display none
+    &.active
+      display flex
+      flex-flow column
+      align-items center
+      justify-content center
+    div.weather div.temp
+      font-size 200%
+      margin-top 20px
+    div.last-update
+      margin-top 10px
+
+
+nav#navbar
+  background #eee
+  padding paddingWidth
+  display flex
+  flex-flow row
+  justify-content space-between
+  a
+    display block

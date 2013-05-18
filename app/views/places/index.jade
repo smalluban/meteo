@@ -1,1 +1,16 @@
-h1 Controller
+form#form(data-event-submit="newPlace")
+  input(type="text", placeholder="Wpisz miejsce")
+  button(type="submit") +
+
+ul#places
+  li(data-foreach-place="places", data-addclass-active="place | equals activePlace")
+    h1(data-source="place.city")
+    div.weather(data-showif="place.weather")
+      div.temp(data-source="place.currentTemp | append ' C'")
+    div.last-update(data-source="place.lastUpdate")
+
+nav#navbar(data-showif="activePlace")
+  a(data-event-click="removePlace") Usuń Miejsce
+  a(data-event-click="prevPlace") Poprzedni
+  a(data-event-click="nextPlace") Nastepny
+  a(data-event-click="refreshPlace") Odśwież
