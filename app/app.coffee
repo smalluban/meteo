@@ -24,7 +24,7 @@ class App extends Batman.App
 window.App = App
 
 # Run App as PhoneGap
-$(document).bind 'deviceready', -> App.run();
+# $(document).bind 'deviceready', -> App.run();
 
 # Run in browser
-# $ -> App.run();
+$ -> App.run();
